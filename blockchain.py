@@ -21,7 +21,7 @@ class Blockchain(object):
 
     def __init__(self, genesis_block):
         """Initialize the blockchain."""
-        self.genesis_block = create_genesis_block()
+        self._chain = [create_genesis_block()]
 
 
 def calculate_hash(index, previous_hash, timestamp, data):
@@ -41,3 +41,13 @@ def generate_next_block(block_data):
 def create_genesis_block():
     """Return the initial block of the blockchain."""
     return Block(0, "0", 1465154705, "the genesis block", "$6$rounds=656000$3B8jwjIaMBHvO4Rk$73YPhzB2ntaF7iwP6i7YChVMK4RD9Qp6rBuqMYmNYgyGtuMCV.NB.JXLNi29oYNyQJTRERWRac8hABzcd9lHO1")
+
+
+def add_block(blockchain, block):
+    """Add a new block to the blockchain."""
+    blockchain._chain.append(block)
+
+
+def get_previous_block(blockchain):
+    """Return the latest block of the blockchain."""
+    return blockchain[-1]
